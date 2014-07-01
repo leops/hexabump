@@ -1,5 +1,8 @@
 function login(callback) {
-	FB.login(callback);
+	FB.login(callback, {
+		scope: 'user_friends,publish_actions',
+		return_scopes: true
+	});
 }
 
 function loginCallback(response) {
@@ -19,4 +22,17 @@ function onStatusChange(response) {
 
 function onAuthResponseChange(response) {
 	console.log('onAuthResponseChange', response);
+}
+
+function sendScore(score, callback) {
+	FB.api('/me/scores/', 'post', {
+		score: score
+	}, function (response) {
+		if (response.error) {
+			console.error('sendScore failed', response);
+		} else {
+			console.log('Score posted to Facebook', response);
+		}
+		callback(response);
+	});
 }

@@ -252,14 +252,7 @@ function initGame() {
 
 		function fbShare(time) {
 			return function (e) {
-				FB.ui({
-					method: "share_open_graph",
-					action_type: "hexabump:score",
-					action_properties: JSON.stringify({
-						game: "http://hexabump.herokuapp.com/",
-						time: time.toISOString()
-					})
-				}, function (response) {
+				sendScore(time, function (response) {
 					console.log(response);
 				});
 			};
@@ -273,7 +266,7 @@ function initGame() {
 				Physics.util.ticker.stop();
 				document.querySelector("#result").querySelector("span").innerHTML = "Time: " + date.getMinutes() + ":" + date.getSeconds() + "." + date.getMilliseconds();
 				document.querySelector(".container").classList.add("end");
-				document.querySelector("#share").onclick = fbShare(date);
+				document.querySelector("#share").onclick = fbShare(date.getTime());
 			}
 		}
 
