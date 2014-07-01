@@ -253,7 +253,14 @@ function initGame() {
 		function fbShare(time) {
 			return function (e) {
 				sendScore(time, function (response) {
-					console.log(response);
+					var list = document.querySelector("#share").classList;
+					if(response === true) {
+						list.add('btn-success');
+						list.remove('btn-danger');
+					} else {
+						list.remove('btn-success');
+						list.add('btn-danger');
+					}
 				});
 			};
 		}
