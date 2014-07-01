@@ -288,6 +288,9 @@ function initGame() {
 function restartGame() {
 	document.querySelector("canvas").remove();
 	document.querySelector(".container").classList.remove('end');
+	var list = document.querySelector("#share").classList;
+	list.remove('btn-danger');
+	list.remove('btn-success');
 	initGame();
 }
 
