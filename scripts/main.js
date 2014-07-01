@@ -292,5 +292,3 @@ function restartGame() {
 }
 
 document.querySelector("#restart").addEventListener('click', restartGame, false);
-
-initGame();

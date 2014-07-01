@@ -27,6 +27,8 @@
 				cookie: true,
 				xfbml: true
 			});
+			FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
+			FB.Event.subscribe('auth.statusChange', onStatusChange);
 			FB.Event.subscribe('auth.login', function(response) {
 				window.location = window.location;
 			});
@@ -89,6 +91,7 @@
 	<script src="bower_components/bootstrap/js/collapse.js"></script>
 	<script src="bower_components/bootstrap/js/tab.js"></script>
 	<script src="scripts/main.js"></script>
+	<script src="scripts/social.js"></script>
 </body>
 
 </html>
