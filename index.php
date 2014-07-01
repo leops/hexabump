@@ -18,6 +18,7 @@
 
 <body>
 	<div id="fb-root"></div>
+	<script src="scripts/social.js"></script>
 	<script type="text/javascript">
 		window.fbAsyncInit = function() {
 			FB.init({
@@ -91,7 +92,6 @@
 	<script src="bower_components/bootstrap/js/collapse.js"></script>
 	<script src="bower_components/bootstrap/js/tab.js"></script>
 	<script src="scripts/main.js"></script>
-	<script src="scripts/social.js"></script>
 </body>
 
 </html>
