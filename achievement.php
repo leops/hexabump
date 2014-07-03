@@ -45,6 +45,7 @@ try {
 	if($achievement == FALSE) {
 		throw new Exception('This achievement does not exists', 404);
 	} else { ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#">
 	<head>
 		<title><?php echo $achievement['title']; ?></title>

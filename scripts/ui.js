@@ -63,8 +63,16 @@ function achievements() {
 	getAchievements(function(res) {
 		$('#achievements tbody').html('');
 		res.data.forEach(function(achieves) {
-			var achievement = achieves.data.achievement;
-			$('#achievements tbody').append($('<tr><td></td><td>' + achievement.title + '</td><td></td><td></td></tr>'));
+			var achievement = achieves.data.achievement,
+				xhr = new XMLHttpRequest()
+			xhr.open('GET', achievement.url.replace('http:', 'https:'), true);
+			xhr.onreadystatechange = function(e) {
+				if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200 && xhr.responseXML) {
+					$('#achievements tbody').append($('<tr><td><img src="' + $(xhr.responseXML).find("meta[property='og:image']").attr('content') + '" alt="Icon"/></td><td>' + $(xhr.responseXML).find("meta[property='og:title']").attr('content') + '</td><td>' + $(xhr.responseXML).find("meta[property='og:description']").attr('content') + '</td><td>' + $(xhr.responseXML).find("meta[property='game:points']").attr('content') + '</td></tr>'));
+				}
+			};
+			xhr.responseType = "document";
+			xhr.send(null);
 		});
 	});
 }
