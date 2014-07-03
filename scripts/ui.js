@@ -17,6 +17,8 @@ function title() {
 }
 
 function result(time) {
+	if(time > 60000)
+		publishAchievement(1);
 	$('#shareScore').removeClass('btn-success').removeClass('btn-danger');
 	$("#result span").html(timeFormat(time));
 	$('.container').addClass('show').find('#ui').attr('class', 'result');
