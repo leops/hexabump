@@ -18,15 +18,16 @@
 
 <body>
 	<div id="fb-root"></div>
-	<div class="container">
+	<div class="container show">
 		<h1 class="row">hexabump</h1>
-		<div id="result">
-			<div>
-				<span></span>
-				<div class="btn-group">
-					<button id="share" type="button" class="btn btn-default">Share</button>
-					<button id="restart" type="button" class="btn btn-default">Try again</button>
-				</div>
+		<div id="ui" class="title">
+			<div id="result">
+				<h2>Time: <span></span></h2>
+				<button id="restart" type="button" class="btn btn-default">Try again</button>
+			</div>
+			<div id="title">
+				<button id="newGame" type="button" class="btn btn-primary">New game</button>
+				<h2>Highscore: <span></span></h2>
 			</div>
 		</div>
 	</div>
@@ -53,6 +54,7 @@
 	<script src="bower_components/two/build/two.min.js"></script>
 	<script src="scripts/render.js"></script>
 	<script src="scripts/main.js"></script>
+	<script src="scripts/ui.js"></script>
 	<script src="scripts/social.js"></script>
 </body>
 

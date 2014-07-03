@@ -17,7 +17,8 @@ function onStatusChange(response) {
 	if (response.status != 'connected') {
 		login(loginCallback);
 	} else {
-		initGame();
+		//initGame();
+		title();
 	}
 }
 
@@ -29,11 +30,6 @@ function sendScore(score, callback) {
 	FB.api('/me/scores/', 'post', {
 		score: score
 	}, function (response) {
-		if (response.error) {
-			console.error('sendScore failed', response);
-		} else {
-			console.log('sendScore succeeded', response);
-		}
 		callback(response);
 	});
 }

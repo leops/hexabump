@@ -42,17 +42,19 @@ h1::after {
 	width: 1170px;
 }
 canvas {
+	position: absolute;
+	left: 0;
 	border: #008fd2 solid 1px;
 	background-color: #1c1c1c;
 }
 .container {
 	position: relative;
 }
-.container.end canvas {
+.show canvas {
 	-webkit-filter: brightness(70%) grayscale(50%);
 	filter: brightness(70%) grayscale(50%);
 }
-#result {
+#ui {
 	position: absolute;
 	z-index: 2;
 	left: 0;
@@ -65,19 +67,29 @@ canvas {
 	font-size: 30px;
 	height: 500px;
 	width: 1170px;
+	border: #008fd2 solid 1px;
+	background-color: #1c1c1c;
 }
-#result div {
+#ui.result {
+	background-color: rgba(28, 28, 28, 0.3);
+}
+#ui div {
 	position: relative;
-	top: calc(50% - (84px / 2));
 	margin-left: auto;
 	margin-right: auto;
 }
-#result span {
+#title {
+	top: calc(50% - (95px / 2));
+}
+#result {
+	top: calc(50% - (85px / 2));
+}
+#result h2 {
 	display: block;
 }
 #result button {
 	color: #2B2B2B;
 }
-.container:not(.end) #result {
+.container:not(.show) #ui, .title #result, .result #title {
 	display: none;
 }

@@ -24,14 +24,23 @@ function buildDBA($url) {
 try {
 	$db = new PDO(buildDBA(getenv('DATABASE_URL')));
 	$query = $db->prepare("SELECT * FROM achievements WHERE id=:id");
+	
+	$id = 0;
 	if(isset($_GET['id'])) {
-		$query->execute(array(':id' => $_GET['id']));
+		$id = $_GET['id'];
 	} else if(isset($_POST['id'])) {
-		$query->execute(array(':id' => $_POST['id']));
+		$id = $_POST['id'];
 	} else {
 		throw new Exception('Undefined id', 400);
 	}
+	
+	if(gettype($id) != 'integer') {
+		throw new Exception('id is not an integer', 400);
+	}
+	
+	$query->execute(array(':id' => $id));
 	$achievement = $query->fetch(PDO::FETCH_ASSOC);
+	
 	if($achievement == FALSE) {
 		throw new Exception('This achievement does not exists', 404);
 	} else { ?>
@@ -39,7 +48,7 @@ try {
 	<head>
 		<title><?php echo $achievement['title']; ?></title>
 		<meta property="og:type" content="game.achievement"/>
-		<meta property="og:url" content="<?php echo AppInfo::getUrl('/achievement.php'); ?>"/>
+		<meta property="og:url" content="<?php echo AppInfo::getUrl('/achievement.php?id=' . $id); ?>"/>
 		<meta property="og:title" content="<?php echo $achievement['title']; ?>"/>
 		<meta property="og:description" content="<?php echo $achievement['description']; ?>"/>
 		<meta property="og:image" content="<?php echo AppInfo::getUrl($achievement['image']); ?>"/>
@@ -60,6 +69,6 @@ try {
 	} else {
 		http_response_code(500);
 	}
-	print "Error: " . $e->getMessage() . " at " . $e->getFile() . ":" . $e->getLine();
+	print "Error: " . $e->getMessage();
 	die();
 }

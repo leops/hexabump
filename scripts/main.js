@@ -1,4 +1,5 @@
 function initGame() {
+	$('.container').removeClass('show');
 	Physics(function (world) {
 		var viewWidth = 1170;
 		var viewHeight = 500;
@@ -99,7 +100,7 @@ function initGame() {
 			updateRadius(radius);
 		}
 
-		document.addEventListener('keydown', onKeydown, false);
+		$(document).keydown(onKeydown);
 
 		function updateRadius(radius) {
 			if (radius > 0) {
@@ -185,7 +186,7 @@ function initGame() {
 		}
 
 		var touches = {};
-		document.addEventListener('touchmove', function (e) {
+		$(document).on('touchmove', function (e) {
 			for (var i in e.touches) {
 				var touch = e.touches[i];
 				if (touch.pageX && touch.pageY) {
@@ -202,9 +203,7 @@ function initGame() {
 					}
 				}
 			}
-		}, false);
-
-		document.addEventListener('touchend', function (e) {
+		}).on('touchend', function (e) {
 			for (var i in e.changedTouches) {
 				var touch = e.changedTouches[i];
 				if (touches[touch.identifier]) {
@@ -216,34 +215,16 @@ function initGame() {
 					console.log(touches[touch.identifier]);
 				}
 			}
-		}, false);
+		});
 
 		var startTime = performance.now();
 
-		function fbShare(time) {
-			return function (e) {
-				sendScore(time, function (response) {
-					var list = document.querySelector("#share").classList;
-					if(response === true) {
-						list.add('btn-success');
-						list.remove('btn-danger');
-					} else {
-						list.remove('btn-success');
-						list.add('btn-danger');
-					}
-				});
-			};
-		}
-
 		function endGame() {
 			if (renderer.playing) {
-				var time = performance.now() - startTime,
-					date = new Date(time);
-				document.removeEventListener('keydown', onKeydown);
+				var time = performance.now() - startTime;
+				$(document).off('keydown', onKeydown);
 				renderer.pause();
-				document.querySelector("#result").querySelector("span").innerHTML = "Time: " + date.getMinutes() + ":" + date.getSeconds() + "." + date.getMilliseconds();
-				document.querySelector(".container").classList.add("end");
-				document.querySelector("#share").onclick = fbShare(date.getTime());
+				result(time);
 			}
 		}
 
@@ -251,12 +232,6 @@ function initGame() {
 }
 
 function restartGame() {
-	document.querySelector("canvas").remove();
-	document.querySelector(".container").classList.remove('end');
-	var list = document.querySelector("#share").classList;
-	list.remove('btn-danger');
-	list.remove('btn-success');
+	$("canvas").remove();
 	initGame();
 }
-
-document.querySelector("#restart").addEventListener('click', restartGame, false);
