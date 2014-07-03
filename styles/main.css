@@ -51,8 +51,8 @@ canvas {
 	position: relative;
 }
 .show canvas {
-	-webkit-filter: brightness(70%) grayscale(50%);
-	filter: brightness(70%) grayscale(50%);
+	-webkit-filter: brightness(70%) grayscale(70%);
+	filter: brightness(70%) grayscale(70%);
 }
 #ui {
 	position: absolute;
@@ -92,4 +92,28 @@ canvas {
 }
 #highscore td:nth-child(2), #achievements td:first-child {
 	padding: 1px;
+}
+.btn-primary {
+	background-color: #008fd2;
+	border-color: #008fd2;
+}
+.btn-primary:hover {
+	background-color: #0076ad;
+	border-color: #0076ad;
+}
+.btn-danger {
+	background-color: #a42a3c;
+	border-color: #a42a3c;
+}
+.btn-danger:hover {
+	background-color: #912535;
+	border-color: #912535;
+}
+.btn-success {
+	background-color: #718a01;
+	border-color: #718a01;
+}
+.btn-success:hover {
+	background-color: #677E03;
+	border-color: #677E03;
 }
