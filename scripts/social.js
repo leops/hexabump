@@ -49,6 +49,7 @@ function publishAchievement(id) {
 function getAchievements(callback) {
 	FB.api(
 		"/me/achievements",
+		{fields: 'data'},
 		function (response) {
 			if (response && !response.error) {
 				callback(response);
@@ -62,7 +63,7 @@ function getAchievements(callback) {
 function getHighscores(callback) {
 	FB.api(
 		"/" + $("meta[property='fb:app_id']").attr('content') + "/scores",
-		{fields: 'score,user.fields(first_name,name,picture.width(120).height(120))'},
+		{fields: 'score,user.fields(name,picture.width(120).height(120))'},
 		function (response) {
 			if (response && !response.error) {
 				callback(response);

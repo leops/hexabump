@@ -21,7 +21,7 @@ function result(time) {
 	$("#result").find("span").html(timeFormat(time));
 	$('.container').addClass('show').find('#ui').attr('class', 'result');
 	$('#shareScore').unbind('click').click(function(e) {
-		shareScore(time, function(res) {
+		shareScore(Math.round(time), function(res) {
 			console.log('shareScore', res);
 			if(res && !res.error)
 				$('#shareScore').removeClass('btn-danger').addClass('btn-success');
@@ -43,7 +43,7 @@ function highscores() {
 	getHighscores(function(res) {
 		$('#highscore tbody').html('');
 		res.data.forEach(function(data, index) {
-			$('#highscore tbody').append($('<tr><td>' + index + '</td><img src="' + data.user.picture.data.url + '" alt="Picture"/><td>' + data.user.name + '</td><td>' + data.score + '</td></tr>'));
+			$('#highscore tbody').append($('<tr><td>' + (index + 1) + '</td><td><img src="' + data.user.picture.data.url + '" alt="Picture"/></td><td>' + data.user.name + '</td><td>' + data.score + '</td></tr>'));
 		});
 	});
 }
@@ -54,7 +54,7 @@ function achievements() {
 		$('#achievements tbody').html('');
 		res.data.forEach(function(achieves) {
 			var achievement = achieves.data.achievement;
-			$('#achievements tbody').append($('<tr><td></td><td>' + achievement.title + '</td><td>' + achievement.description + '</td><td>' + achievement.data.points + '</td></tr>'));
+			$('#achievements tbody').append($('<tr><td></td><td>' + achievement.title + '</td><td></td><td></td></tr>'));
 		});
 	});
 }
