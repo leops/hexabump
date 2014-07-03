@@ -38,9 +38,7 @@ function publishAchievement(id) {
 		"/me/achievements",
 		"POST",
 		{
-			"object": {
-				"achievement": "http://hexabump.herokuapp.com/achievement.php?id=" + id
-			}
+			"achievement": "http://hexabump.herokuapp.com/achievement.php?id=" + id
 		},
 		function (response) {
 			console.log('publishAchievement', response);
