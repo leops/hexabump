@@ -29,12 +29,12 @@ function result(time) {
 				$('#shareScore').addClass('btn-danger').removeClass('btn-success');
 		});
 	});
-	FB.api('/me/scores', function(response) {
-		if( response.data && response.data.score < time ) {
+	FB.api('/me/score', function(response) {
+		if(response.data && response.data[0] && response.data[0].score < time) {
 			$("#result span").tooltip({
 				title: 'New highscore!',
 				trigger: 'manual'
-			});
+			}).tooltip('show');
 			sendScore(time, function (response) {
 				if (response.error) {
 					console.error('sendScore failed', response);
@@ -42,6 +42,8 @@ function result(time) {
 					console.log('sendScore succeeded', response);
 				}
 			});
+		} else {
+			console.log(response.data, time);
 		}
 	});
 }
