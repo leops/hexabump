@@ -24,8 +24,17 @@ function buildDBA($url) {
 try {
 	$db = new PDO(buildDBA(getenv('DATABASE_URL')));
 	$query = $db->prepare("SELECT * FROM achievements WHERE id=:id");
-	$query->execute(array(':id' => $_GET['id']));
-	$achievement = $query->fetch(PDO::FETCH_ASSOC); ?>
+	if(isset($_GET['id'])) {
+		$query->execute(array(':id' => $_GET['id']));
+	} else if(isset($_POST['id'])) {
+		$query->execute(array(':id' => $_POST['id']));
+	} else {
+		throw new Exception('Undefined id', 400);
+	}
+	$achievement = $query->fetch(PDO::FETCH_ASSOC);
+	if($achievement == FALSE) {
+		throw new Exception('This achievement does not exists', 404);
+	} else { ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#">
 	<head>
 		<title><?php echo $achievement['title']; ?></title>
@@ -42,8 +51,15 @@ try {
 		<p><?php echo $achievement['description']; ?></p>
 	</body>
 </html>
-<?php
-} catch (PDOException $e) {
-	print "Error: " . $e->getMessage();
+<?php }
+	$query->closeCursor();
+} catch (Exception $e) {
+	$code = $e->getCode();
+	if($code == 400 || $code == 404) {
+		http_response_code($code);
+	} else {
+		http_response_code(500);
+	}
+	print "Error: " . $e->getMessage() . " at " . $e->getFile() . ":" . $e->getLine();
 	die();
 }
