@@ -23,7 +23,10 @@
 		<div id="ui" class="title">
 			<div id="result">
 				<h2>Time: <span></span></h2>
-				<button id="restart" type="button" class="btn btn-primary">Try again</button>
+				<div class="btn-group">
+					<button id="restart" type="button" class="btn btn-primary">Try again</button>
+					<button id="shareScore" type="button" class="btn btn-default">Share this score</button>
+				</div>
 			</div>
 			<div id="title">
 				<button id="newGame" type="button" class="btn btn-primary">New game</button>
@@ -37,6 +40,7 @@
 					<thead>
 						<tr>
 							<th>#</th>
+							<th>Picture</th>
 							<th>Name</th>
 							<th>Score</th>
 						</tr>

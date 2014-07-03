@@ -62,6 +62,7 @@ function getAchievements(callback) {
 function getHighscores(callback) {
 	FB.api(
 		"/" + $("meta[property='fb:app_id']").attr('content') + "/scores",
+		{fields: 'score,user.fields(first_name,name,picture.width(120).height(120))'},
 		function (response) {
 			if (response && !response.error) {
 				callback(response);
@@ -70,6 +71,13 @@ function getHighscores(callback) {
 			}
 		}
 	);
+}
+
+function shareScore(score, callback) {
+	FB.ui({ method: 'share_open_graph',
+		   "action_type": "hexabump:score",
+		   "action_properties": JSON.stringify({score: score})
+	}, callback);
 }
 
 window.fbAsyncInit = function() {
