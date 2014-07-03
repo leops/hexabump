@@ -232,6 +232,7 @@ function initGame() {
 }
 
 function restartGame() {
+	$("#result span").tooltip('destroy');
 	$("canvas").remove();
 	initGame();
 }

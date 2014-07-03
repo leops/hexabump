@@ -18,7 +18,7 @@ function title() {
 
 function result(time) {
 	$('#shareScore').removeClass('btn-success').removeClass('btn-danger');
-	$("#result").find("span").html(timeFormat(time));
+	$("#result span").html(timeFormat(time));
 	$('.container').addClass('show').find('#ui').attr('class', 'result');
 	$('#shareScore').unbind('click').click(function(e) {
 		shareScore(Math.round(time), function(res) {
@@ -29,11 +29,19 @@ function result(time) {
 				$('#shareScore').addClass('btn-danger').removeClass('btn-success');
 		});
 	});
-	sendScore(time, function (response) {
-		if (response.error) {
-			console.error('sendScore failed', response);
-		} else {
-			console.log('sendScore succeeded', response);
+	FB.api('/me/scores', function(response) {
+		if( response.data && response.data.score < time ) {
+			$("#result span").tooltip({
+				title: 'New highscore!',
+				trigger: 'manual'
+			});
+			sendScore(time, function (response) {
+				if (response.error) {
+					console.error('sendScore failed', response);
+				} else {
+					console.log('sendScore succeeded', response);
+				}
+			});
 		}
 	});
 }

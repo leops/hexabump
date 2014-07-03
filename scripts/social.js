@@ -77,7 +77,10 @@ function getHighscores(callback) {
 function shareScore(score, callback) {
 	FB.ui({ method: 'share_open_graph',
 		   "action_type": "hexabump:score",
-		   "action_properties": JSON.stringify({score: score})
+		   "action_properties": JSON.stringify({
+			   score: score,
+			   game: $("meta[property='og:url']").attr('content')
+		   })
 	}, callback);
 }
 
