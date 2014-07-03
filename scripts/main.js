@@ -3,31 +3,7 @@ function initGame() {
 		var viewWidth = 1170;
 		var viewHeight = 500;
 
-		window.renderer = Physics.renderer('canvas', {
-			el: document.querySelector('.container'),
-			width: viewWidth,
-			height: viewHeight,
-			meta: false,
-			styles: {
-				'circle': {
-					lineWidth: 0,
-					fillStyle: '#718a01',
-					angleIndicator: '#718a01'
-				},
-				'convex-polygon': {
-					strokeStyle: '#008fd2',
-					lineWidth: 3,
-					fillStyle: '#282828',
-					angleIndicator: '#282828'
-				}
-			}
-		});
-		renderer.el.classList.add('row');
-		world.add(renderer);
-
-		world.on('step', function () {
-			world.render();
-		});
+		var renderer = makeRenderer(world);
 
 		var viewportBounds = Physics.aabb(0, 0, viewWidth, viewHeight);
 		world.add(Physics.behavior('edge-collision-detection', {
@@ -127,13 +103,7 @@ function initGame() {
 
 		function updateRadius(radius) {
 			if (radius > 0) {
-				if (radius < 10)
-					renderer.options.styles.circle.fillStyle = renderer.options.styles.circle.angleIndicator = '#a42a3c';
-				else
-					renderer.options.styles.circle.fillStyle = renderer.options.styles.circle.angleIndicator = '#718a01';
-
 				ball.geometry.radius = ball.radius = radius;
-				ball.view = renderer.createView(ball.geometry, renderer.options.styles.circle);
 				ball.recalc();
 			} else
 				endGame();
@@ -266,22 +236,17 @@ function initGame() {
 		}
 
 		function endGame() {
-			if (Physics.util.ticker.isActive()) {
+			if (renderer.playing) {
 				var time = performance.now() - startTime,
 					date = new Date(time);
 				document.removeEventListener('keydown', onKeydown);
-				Physics.util.ticker.stop();
+				renderer.pause();
 				document.querySelector("#result").querySelector("span").innerHTML = "Time: " + date.getMinutes() + ":" + date.getSeconds() + "." + date.getMilliseconds();
 				document.querySelector(".container").classList.add("end");
 				document.querySelector("#share").onclick = fbShare(date.getTime());
 			}
 		}
 
-		Physics.util.ticker.on(function (time, dt) {
-			world.step(time);
-		});
-
-		Physics.util.ticker.start();
 	});
 }
 

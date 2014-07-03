@@ -18,35 +18,6 @@
 
 <body>
 	<div id="fb-root"></div>
-	<script src="scripts/social.js"></script>
-	<script type="text/javascript">
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId: '<?php echo AppInfo::appID(); ?>',
-				channelUrl: '//<?php echo $_SERVER["HTTP_HOST"]; ?>/channel.html',
-				status: true,
-				cookie: true,
-				xfbml: true
-			});
-			FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
-			FB.Event.subscribe('auth.statusChange', onStatusChange);
-			FB.Event.subscribe('auth.login', function(response) {
-				window.location = window.location;
-			});
-
-			FB.Canvas.setAutoGrow();
-		};
-
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "//connect.facebook.net/en_US/all.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
-
 	<div class="container">
 		<h1 class="row">hexabump</h1>
 		<div id="result">
@@ -76,22 +47,13 @@
 		ga('send', 'pageview');
 	</script>
 
-	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-	<script src="bower_components/physicsjs/dist/physicsjs-full-0.6.0.js"></script>
-	<script src="bower_components/bootstrap/js/affix.js"></script>
-	<script src="bower_components/bootstrap/js/alert.js"></script>
-	<script src="bower_components/bootstrap/js/dropdown.js"></script>
-	<script src="bower_components/bootstrap/js/tooltip.js"></script>
-	<script src="bower_components/bootstrap/js/modal.js"></script>
-	<script src="bower_components/bootstrap/js/transition.js"></script>
-	<script src="bower_components/bootstrap/js/button.js"></script>
-	<script src="bower_components/bootstrap/js/popover.js"></script>
-	<script src="bower_components/bootstrap/js/carousel.js"></script>
-	<script src="bower_components/bootstrap/js/scrollspy.js"></script>
-	<script src="bower_components/bootstrap/js/collapse.js"></script>
-	<script src="bower_components/bootstrap/js/tab.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/physicsjs/dist/physicsjs-full-0.6.0.min.js"></script>
+	<script src="bower_components/two/build/two.min.js"></script>
+	<script src="scripts/render.js"></script>
 	<script src="scripts/main.js"></script>
+	<script src="scripts/social.js"></script>
 </body>
 
 </html>
