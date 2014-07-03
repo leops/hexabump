@@ -87,9 +87,6 @@ canvas {
 #result h2 {
 	display: block;
 }
-#result button {
-	color: #2B2B2B;
-}
-.container:not(.show) #ui, .title #result, .result #title {
+.container:not(.show) #ui, #ui:not(.result) #result, #ui:not(.title) #title, #ui:not(.highscore) #highscore, #ui:not(.achievements) #achievements {
 	display: none;
 }

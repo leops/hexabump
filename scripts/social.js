@@ -34,9 +34,50 @@ function sendScore(score, callback) {
 	});
 }
 
+function publishAchievement(id) {
+	FB.api(
+		"/me/achievements",
+		"POST",
+		{
+			"object": {
+				"achievement": "http://hexabump.herokuapp.com/achievement.php?id=" + id
+			}
+		},
+		function (response) {
+			console.log('publishAchievement', response);
+		}
+	);
+}
+
+function getAchievements(callback) {
+	FB.api(
+		"/me/achievements",
+		function (response) {
+			if (response && !response.error) {
+				callback(response);
+			} else {
+				console.error('getAchievements', response);
+			}
+		}
+	);
+}
+
+function getHighscores(callback) {
+	FB.api(
+		"/" + $("meta[property='fb:app_id']").attr('content') + "/scores",
+		function (response) {
+			if (response && !response.error) {
+				callback(response);
+			} else {
+				console.error('getHighscores', response);
+			}
+		}
+	);
+}
+
 window.fbAsyncInit = function() {
 	FB.init({
-		appId: document.querySelector("meta[property='fb:app_id']").content,
+		appId: $("meta[property='fb:app_id']").attr('content'),
 		channelUrl: '//' + location.host + '/channel.html',
 		status: true,
 		cookie: true,

@@ -23,11 +23,43 @@
 		<div id="ui" class="title">
 			<div id="result">
 				<h2>Time: <span></span></h2>
-				<button id="restart" type="button" class="btn btn-default">Try again</button>
+				<button id="restart" type="button" class="btn btn-primary">Try again</button>
 			</div>
 			<div id="title">
 				<button id="newGame" type="button" class="btn btn-primary">New game</button>
-				<h2>Highscore: <span></span></h2>
+				<div class="btn-group">
+					<button id="hsBtn" type="button" class="btn btn-default">Highscores</button>
+					<button id="achBtn" type="button" class="btn btn-default">Achievements</button>
+				</div>
+			</div>
+			<div id="highscore">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<button type="button" class="titleBtn btn btn-default">Return to title</button>
+			</div>
+			<div id="achievements">
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Title</th>
+							<th>Description</th>
+							<th>Points</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<button type="button" class="titleBtn btn btn-default">Return to title</button>
 			</div>
 		</div>
 	</div>
