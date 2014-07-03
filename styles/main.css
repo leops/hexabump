@@ -90,3 +90,6 @@ canvas {
 .container:not(.show) #ui, #ui:not(.result) #result, #ui:not(.title) #title, #ui:not(.highscore) #highscore, #ui:not(.achievements) #achievements {
 	display: none;
 }
+#highscore td:nth-child(2), #achievements td:first-child {
+	padding: 1px;
+}
