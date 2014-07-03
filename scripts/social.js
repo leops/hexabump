@@ -17,7 +17,6 @@ function onStatusChange(response) {
 	if (response.status != 'connected') {
 		login(loginCallback);
 	} else {
-		//initGame();
 		title();
 	}
 }

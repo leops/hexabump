@@ -33,7 +33,7 @@ function highscores() {
 	getHighscores(function(res) {
 		$('#highscore tbody').html('');
 		res.data.forEach(function(data, index) {
-			$('#highscore tbody').append($('<tr><td><img src="' + data.image[0].url + '" alt="Icone"/></td><td>' + data.title + '</td><td>' + data.description + '</td><td>' + data.data.points + '</td></tr>'))
+			$('#highscore tbody').append($('<tr><td>' + index + '</td><td>' + data.user.name + '</td><td>' + data.score + '</td></tr>'));
 		});
 	});
 }
@@ -42,8 +42,8 @@ function achievements() {
 	$('.container').addClass('show').find('#ui').attr('class', 'achievements');
 	getAchievements(function(res) {
 		$('#achievements tbody').html('');
-		res.data.forEach(function(data, index) {
-			$('#achievements tbody').append($('<tr><td>' + index + '</td><td>' + data.user.name + '</td><td>' + data.score + '</td></tr>'))
+		res.data.forEach(function(data) {
+			$('#achievements tbody').append($('<tr><td><img src="' + data.image[0].url + '" alt="Icone"/></td><td>' + data.title + '</td><td>' + data.description + '</td><td>' + data.data.points + '</td></tr>'));
 		});
 	});
 }
