@@ -26,6 +26,7 @@
 				<div class="btn-group">
 					<button id="restart" type="button" class="btn btn-primary">Try again</button>
 					<button id="shareScore" type="button" class="btn btn-default">Share this score</button>
+					<button type="button" class="titleBtn btn btn-default">Return to title screen</button>
 				</div>
 			</div>
 			<div id="title">

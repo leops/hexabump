@@ -53,7 +53,7 @@ function highscores() {
 	getHighscores(function(res) {
 		$('#highscore tbody').html('');
 		res.data.forEach(function(data, index) {
-			$('#highscore tbody').append($('<tr><td>' + (index + 1) + '</td><td><img src="' + data.user.picture.data.url + '" alt="Picture"/></td><td>' + data.user.name + '</td><td>' + data.score + '</td></tr>'));
+			$('#highscore tbody').append($('<tr><td>' + (index + 1) + '</td><td><img src="' + data.user.picture.data.url + '" alt="Picture"/></td><td>' + data.user.name + '</td><td>' + timeFormat(data.score) + '</td></tr>'));
 		});
 	});
 }

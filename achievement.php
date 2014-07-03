@@ -34,6 +34,7 @@ try {
 		throw new Exception('Undefined id', 400);
 	}
 	
+	$id = intval($id);
 	if(gettype($id) != 'integer') {
 		throw new Exception('id is not an integer', 400);
 	}
